@@ -1,18 +1,13 @@
-### Classes
-- instanciando a classe Animais -> ```$animais = new Animais()``` 
-<br>
--  Formatação da página para os var_dumps ->  ```echo '<pre>'; ```
-<br>
-- var_dump -> para Validar se o Método POST está trazendo os dados de maneira correta -> ```var_dump($_POST);```  
-<br>
--  var_dump -> Para Validar se o método FILES está correto -> ```var_dump($_FILES);```
-<br>
-- Condição que verificar se as validações estão corretas para executar o próximo conteúdo -> ```if($_SERVER['REQUEST_METHOD'] = 'POST' && isset($_POST['cadastro'])){ ```
-<br>
+<?php
+include './class/Animais.php';
+$animais = new Animais(); // instanciando a classe Animais
 
-    $nomeAnimal = $_POST['nome_animal']; // 
-    pelo input do nome do animal, utilizando método POST
-    <br>
+echo '<pre>'; // Formatação da página para os var_dumps
+var_dump($_POST); // var_dump -> para Validar se o Método POST está trazendo os dados de maneira correta
+var_dump($_FILES); // var_dump -> Para Validar se o método $_FILES está correto
+
+if($_SERVER['REQUEST_METHOD'] = 'POST' && isset($_POST['cadastro'])){ // Condição que verificar se as validações estão corretas para executar o próximo conteúdo
+    $nomeAnimal = $_POST['nome_animal']; // Recebendo o nome do Animal pelo input do nome do animal, utilizando método POST
     $localTemp = $_FILES['foto_animal']['tmp_name']; // Pegando o local onde o arquivo está sendo alocado pelo arquivo, utilizando o método $_FILES
     $nomeArquivo = $_FILES['foto_animal']['name']; // Pegando o nome do arquivo pelo método $_FILES
 
