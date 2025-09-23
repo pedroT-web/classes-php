@@ -1,16 +1,16 @@
-### Classes
+### Classes e Funções
 ```class Animais -> // Criando a classe Animais
 {
 
     private $conn; -> // Criando uma variável privada, que pode ser acessada apenas no arquivo onde foi declarada
 
-    public function __construct()
+    public function __construct() // Função de Contruir a classe, quando a classe é chamada, ele que executa ela
     {
-        $dsn = 'mysql:dbname=db_aula05;host=127.0.0.1';
+        $dsn = 'mysql:dbname=db_aula05;host=127.0.0.1'; 
         $usuario = 'root';
         $senha = '';
 
-        $this->conn = new PDO($dsn, $usuario, $senha);
+        $this->conn = new PDO($dsn, $usuario, $senha); // this é utilizado para especificar que o conn é aquele, se eu definisse um conn dentro da função, ele seria diferente do conn privado criado anteriormente
     }
 
     public function consultarAnimais()
@@ -22,7 +22,7 @@
         return $resultado;
     }
 
-    public function consultarAnimaisById($id)
+    public function consultarAnimaisById($id) // o $id dentro do parenteses é um parametro
     {
         $script = "SELECT * FROM tb_animais WHERE id = {$id}";
 
@@ -31,7 +31,7 @@
         return $resultado;
     }
 
-    public function cadastroAnimais($nome, $nome_arquivo, $tipo, $caminho_arquivo)
+    public function cadastroAnimais($nome, $nome_arquivo, $tipo, $caminho_arquivo) // as váriaveis entre parenteses são parametros
     {
         $script = "INSERT INTO tb_animais(nome_animal, nome_arquivo_original, tipo_arquivo, caminho_arquivo) VALUES (:nome_animal, :nome_arquivo, :tipo_arquivo, :caminho_arquivo)";
 
@@ -44,9 +44,10 @@
             ":caminho_arquivo" => $caminho_arquivo
         ]);
 
-        return $this->conn->lastInsertId();
+        return $this->conn->lastInsertId(); // Retorna o id do ultimo valor inserido 
     }
-}```
+}
+```
 
 ### Utilizando a classe e novos Métodos
 
@@ -79,5 +80,16 @@ move o arquivo que foi feito pelo metodo FILE para o caminho informado ex: $loca
     <br>
     Exibindo um Titulo para confirmar que foi salva uma imagem -> ```echo '<h1>Imagem Salva Com Sucesso!!</h1>';```
 }
-
 }
+
+### Instanciando a Classe Animais
+
+```
+    <?php 
+        include './class/Animais.php'; // Incluindo a pasta de 
+        $animais = new Animais(); // Instanciando a classe Animais
+
+        $todosAnimais = $animais->consultarAnimais(); // Utilizando a classe Animais para poder utilizar a função consultarAnimais que foi declarada na classe Animais
+    ?>
+
+```
